@@ -1,0 +1,91 @@
+Algoritmo esc	
+	Definir lista,hora,pago,i,j,pos,total Como Entero
+	Dimension lista[4,5]
+	
+	Escribir "ingrese el monto que la institucion paga"
+	leer pago
+	mientras (pago <= 0) Hacer
+		Escribir "monto invalido"
+		Escribir "ingrese el monto que la institucion paga"
+		leer pago
+	FinMientras
+	
+	Para i = 0 Hasta 3 Con Paso 1 Hacer
+		Para j = 0 hasta 4 Con Paso 1 Hacer
+			
+			Escribir "ingrese las horas trabajadas por el profesor ",i + 1," "," en el dia ",j+1
+			Leer lista[i,j]
+			
+			Mientras (lista[i,j] <= 0) Hacer
+				Escribir "ingrese las horas trabajadas por el profesor ", i + 1," "," en el dia ",j+1
+				Leer lista[i,j]
+			FinMientras
+		FinPara
+	FinPara
+	
+	hora = horasclases(lista,i,j,pos,pago,total)
+	importetotal(lista,i,j,pago)
+	
+	Escribir "el profesor ", pos+1 ," tiene la mayor contidad de horas con un total de : ",hora
+	Escribir " "
+	Escribir "el profesor ", pos+1 ," cobrara un total de : $ ", total
+	Escribir ""
+	
+	// MUESTRA COMO SE CARGA EL ARREGLO
+    Para i=0 Hasta 3 Con Paso 1 Hacer
+        Para j=0 Hasta 4 Con Paso 1 Hacer
+            Escribir lista[i,j] Sin Saltar
+        Fin Para
+        Escribir ""
+    Fin Para
+	
+FinAlgoritmo
+
+Funcion x = horasclases(lista,i,j,pos Por Referencia,pago,total Por Referencia)
+	
+	definir x,suma Como Entero
+	Dimension suma[4]
+	
+	Para i=0 Hasta 3 Con Paso 1 Hacer
+		
+		suma[i] = lista[i,0]+lista[i,1]+lista[i,2]+lista[i,3]+lista[i,4]
+		
+	Fin Para
+	
+	
+	para i = 0 hasta 3 Hacer
+		si i == 0 Entonces
+			x = suma[i]
+			pos = i
+			total = pago * x
+		SiNo
+			si	suma[i] > x Entonces
+				x = suma[i]
+				pos = i
+				total = pago * x
+			FinSi
+		FinSi
+	FinPara
+	
+FinFuncion
+
+SubProceso importetotal(lista,i,j,pago)
+	
+	Definir importes,imptotal Como entero
+	Dimension importes[5], imptotal[5]
+	
+	Para i = 0 Hasta 4 Con Paso 1 Hacer
+		importes[i]= lista[0,i]+lista[1,i]+lista[2,i]+lista[3,i]
+	Fin Para
+	
+	Para i = 0 Hasta 4 Hacer
+		imptotal[i] = pago * importes[i]
+	FinPara
+	
+	Escribir "el monto a cobrar el dia lunes es de : ",imptotal[0]
+	Escribir "el monto a cobrar el dia martes es de : ",imptotal[1]
+	Escribir "el monto a cobrar el dia miercoles es de : ",imptotal[2]
+	Escribir "el monto a cobrar el dia jueves es de : ",imptotal[3]
+	Escribir "el monto a cobrar el dia viernes es de : ",imptotal[4]
+	
+FinSubProceso
